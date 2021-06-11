@@ -5,11 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    table{
+        border-spacing: 5px
+    }
+    #t01 tr:nth-child(even) {
+    background-color: #eee;
+    }
+    #t01 tr:nth-child(odd) {
+    background-color: #fff;
+    }
+    #t01 th {
+    color: white;
+    background-color: black;
+    }
+    </style>
 </head>
 <body>
     <center>
         <h1>All Articles - Page</h1>
-        <table>
+        <table id="t01">
             <thead>
             <tr>
                 <th>Article_id       </th>
