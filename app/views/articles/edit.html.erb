@@ -9,29 +9,8 @@
 <body>
     <center>
         <h1>Create New Article</h1>
-        <div style="text-align:left">
-        <ul>
-        <% if @article.errors.any? %>
-        <% @article.errors.full_messages.each do|e|%>
-            <li><%=e%></li>
-        <%end%>
-        <%end%>
-        <ul>
-        </div>
-
-        <%= form_with(model: @article, local: true) do |new| %>
-        <p>
-        <%= new.label :title %><br>
-        <%= new.text_field :title %>
-        </p>
-        <p>
-        <%= new.label :description %><br>
-        <%= new.text_area :description %>
-        </p>
-        <p>
-        <%= new.submit %>
-        </p>
-        <%end%>
+        <%= render 'form' %>
+        <%= link_to 'Cancel and return Home', articles_path %>
     </center>
 </body>
 </html>
