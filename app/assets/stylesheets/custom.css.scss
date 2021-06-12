@@ -8,12 +8,19 @@
     color: white !important;
 }
 
+pre { 
+    white-space: pre-wrap; 
+    word-break: break-word;
+    word-wrap: break-word;display: flex;
+
+}
+
 #logo{
     color: rgb(171, 240, 245);
     float: left;
-    font-size: 1.9em;
-    letter-spacing: -1px;
-    font-weight:400;
+    font-size: 2em;
+    letter-spacing: 0.6px;
+    font-weight:500;
 }
 
 
