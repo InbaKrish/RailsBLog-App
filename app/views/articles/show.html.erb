@@ -16,7 +16,7 @@
         <p><strong>Description :</strong><%= @article.description %></p>
         <p>
         <%= link_to 'Edit', edit_article_path(@article) %> | 
-        <%= link_to 'Delete', article_path(@article),method: :delete, data: {confirm: "Are you sure to delete?"} %> |
+        <%= link_to 'Delete Article', articles_delete_path, method: :delete  %>|
         <%= link_to 'Return Home', articles_path %>
         </p>
     </center>

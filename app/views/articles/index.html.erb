@@ -23,29 +23,37 @@
 </head>
 <body>
     <center>
-        <h1>All Articles - Page</h1>
-        <table id="t01">
-            <thead>
-            <tr>
-                <th>Article_id       </th>
-                <th>Title       </th>
-                <th>Description </th>
-                <th colspan = "3">Actions     </th>
-            </tr></thead>
-            <tbody>
-                <% @articles.each do |article| %>
-                    <tr>
-                    <td> <%= article.id %>  </td>
-                    <td> <%= article.title %>  </td>
-                    <td> <%= article.description %> </td>
-                    <td> <%= link_to 'show',article_path(article) %> </td>
-                    <td> <%= link_to 'edit',edit_article_path(article) %> </td>
-                    <td> <%= link_to 'delete',article_path(article), method: :delete, data: {confirm: "Are you sure to delete?"}  %> </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-        <p><%= link_to 'Create article',new_article_path %> </p>
+        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1>
+
+        <% 
+        articles = @articles.sort_by { |t| [t.updated_at , t.created_at]}.reverse
+        articles.each do |article| %>
+            <br><br><br>
+            <div class="row justify-content-md-center">
+            <div class="col-6">
+        <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
+            <div class="card-header ">
+               <span style="color:rgb(204, 204, 204)"><i> by Inba </i> </span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"> <span style="color:rgb(102, 102, 255)"> <%= link_to article.title, article_path(article) %> </h5>
+                <p class="card-text"> <span style="rgb(166, 166, 166)"> 
+                <%= truncate(article.description,length:120) %> </span></p>
+                
+                <%= link_to "View", article_path(article) ,class:"btn btn-outline-success"%>
+                <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>
+                <%=  link_to 'Delete', articles_delete_path(article), method: :delete, data: {confirm: "Are you sure to delete?"} ,class:"btn btn-outline-danger"%>
+            </div>
+            <div class="card-footer text-muted">
+                <small>Created <%= time_ago_in_words(article.created_at)%> ago ,
+                Updated <%= time_ago_in_words(article.updated_at)%> ago
+                </small>
+            </div>
+            </div></div></div>
+        <% end %>
+
+        
+        <p><%= link_to 'Create article',new_article_path, class:"btn btn-lg btn-primary"  %> </p>
     </center>
 </body>
 </html>

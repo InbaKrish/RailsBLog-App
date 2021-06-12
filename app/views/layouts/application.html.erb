@@ -10,10 +10,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  <%flash.each do |name,msg|%>
-  <%=msg%>
-  <%end%>
-    <%= yield %>
-  </body>
+  <body style="background-color:rgb(64, 64, 64)">
+    <%= render 'layouts/navbar' %>
+    <%flash.each do |name,msg|%>
+    <%=msg%>
+    <%end%>
+      <%= yield %>
+    </body>
 </html>
