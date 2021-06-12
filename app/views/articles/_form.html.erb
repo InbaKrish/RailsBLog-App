@@ -1,23 +1,28 @@
-<div style="text-align:left">
-    <ul>
-        <% if @article.errors.any? %>
-            <% @article.errors.full_messages.each do|e|%>
-                <li><%=e%></li>
-            <%end%>
-        <%end%>
-    <ul>
-</div>
+<div class="container ">
 
-<%= form_with(model: @article, local: true) do |new| %>
-    <p>
-        <%= new.label :title %><br>
-        <%= new.text_field :title %>
-    </p>
-    <p>
-        <%= new.label :description %><br>
-        <%= new.text_area :description %>
-    </p>
-    <p>
-        <%= new.submit %>
-    </p>
+<%= render 'shared/errors' %>
+
+<%= form_with(model: @article, local: true, class:"shadow-lg p-3 mb-3 rounded") do |new| %>
+    
+    <span style="color:rgb(179, 179, 179)"> 
+    <div class="form-group row mt-4">
+       <%= new.label :title, class:"col-2 col-form-table" %>
+        <div class="col-10">
+        <%= new.text_field :title, class:"form-control shadow rounded", placeholder:"Title of the article" %></div>
+    </div></span>
+    
+    <span style="color:rgb(179, 179, 179)">
+    <div class="form-group row mt-4">
+        <%= new.label :description, class:"col-2 col-form-table" %>
+        <div class="col-10">
+        <%= new.text_area :description, class:"form-control shadow rounded", placeholder:"Description of the article", rows:5 %></div>
+    </div></span>
+    
+    <div class="form-group row mt-4">
+    <center>
+        <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %></center>
+    </div><br><br>
+    
+    <h6><%= link_to '< Cancel and return Home >', articles_path,class:"text-success" %></h6>
 <%end%>
+</div>

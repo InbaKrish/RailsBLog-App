@@ -1,0 +1,22 @@
+<% if @article.errors.any? %>
+    <div id="alert" class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <div style="text-align:left">
+        <h4 class="alert-heading">Errors!</h4>
+        <hr>
+        
+        <ul>
+            <% @article.errors.full_messages.each do|e|%>
+                <li><%=e%></li>
+            <%end%>
+        </ul></div>
+
+        <button type="button " class="close btn btn-lg float-right" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<%end%>
+  <script type="text/javascript">
+    setTimeout(function () {
+        $('#alert').alert('close');
+    }, 2000);
+  </script>

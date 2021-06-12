@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rails Blog</title>
     <style>
     table{
         border-spacing: 5px
@@ -23,12 +23,11 @@
 </head>
 <body>
     <center>
-        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1>
-
+        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1><br>
         <% 
         articles = @articles.sort_by { |t| [t.updated_at , t.created_at]}.reverse
         articles.each do |article| %>
-            <br><br><br>
+            <br><br>
             <div class="row justify-content-md-center">
             <div class="col-6">
         <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
@@ -40,9 +39,9 @@
                 <p class="card-text"> <span style="rgb(166, 166, 166)"> 
                 <%= truncate(article.description,length:120) %> </span></p>
                 
-                <%= link_to "View", article_path(article) ,class:"btn btn-outline-success"%>
-                <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>
-                <%=  link_to 'Delete', articles_delete_path(article), method: :delete, data: {confirm: "Are you sure to delete?"} ,class:"btn btn-outline-danger"%>
+                <%= link_to "View", article_path(article) ,class:"btn btn-outline-success"%>&nbsp;&nbsp;
+                <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
+                <%=  link_to 'Delete', articles_delete_path(article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
             </div>
             <div class="card-footer text-muted">
                 <small>Created <%= time_ago_in_words(article.created_at)%> ago ,
@@ -51,9 +50,6 @@
             </div>
             </div></div></div>
         <% end %>
-
-        
-        <p><%= link_to 'Create article',new_article_path, class:"btn btn-lg btn-primary"  %> </p>
     </center>
 </body>
 </html>
