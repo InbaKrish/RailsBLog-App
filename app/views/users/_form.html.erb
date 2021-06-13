@@ -25,7 +25,7 @@
         <%= new.password_field :password, class:"form-control shadow rounded", placeholder:"Enter a Password" %></div>
     </div></span>
     <br>
-       <center> <%= new.submit "Sign Up", class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
+       <center> <%= new.submit(@user.new_record? ? "Sign Up" : "Update", class:"btn btn-outline-light btn-lg shadow rounded") %> </center>
     <br><br>
     
     <h6><%= link_to '< Cancel and return to -> Articles page >', articles_path,class:"text-success" %></h6>
