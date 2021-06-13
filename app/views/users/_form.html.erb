@@ -22,10 +22,10 @@
     <div class="form-group row mt-4">
         <%= new.label :password, class:"col-2 col-form-table" %>
         <div class="col-10">
-        <%= new.password_field :password, class:"form-control shadow rounded", placeholder:"Password" %></div>
+        <%= new.password_field :password, class:"form-control shadow rounded", placeholder:"Enter a Password" %></div>
     </div></span>
     <br>
-       <center> <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
+       <center> <%= new.submit "Sign Up", class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
     <br><br>
     
     <h6><%= link_to '< Cancel and return Home >', articles_path,class:"text-success" %></h6>
