@@ -1,0 +1,5 @@
+<%if @comments.length >0%>
+    <% @comments.each do |cmt| %>
+        <%= cmt.content , class:"text-white"%>
+    <%end%>
+<%end%>
