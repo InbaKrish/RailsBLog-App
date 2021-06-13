@@ -23,8 +23,9 @@
 </head>
 <body>
     <center>
-        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1><br>
-        <%= render 'showarticles' %>
+        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> <%=@user.user_name%>'s articles </span></h1><br>
+        <%= render 'articles/showarticles' if @articles.length > 0 %>
+        <%= render 'nocontent' if @articles.length <= 0 %>
     </center>
 </body>
 </html>
