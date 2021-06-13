@@ -1,11 +1,11 @@
-<% if @article.errors.any? %>
+<% if cur_obj.errors.any? %>
     <div id="alert" class="alert alert-secondary alert-dismissible fade show" role="alert">
         <div style="text-align:left">
         <h4 class="alert-heading">Errors!</h4>
         <hr>
         
         <ul>
-            <% @article.errors.full_messages.each do|e|%>
+            <% cur_obj.errors.full_messages.each do|e|%>
                 <li><%=e%></li>
             <%end%>
         </ul></div>

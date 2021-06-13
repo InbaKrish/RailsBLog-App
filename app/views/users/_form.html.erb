@@ -1,0 +1,33 @@
+<div class="container ">
+
+<%= render 'shared/errors', cur_obj:@user %>
+
+<%= form_with(model: @user, local: true, class:"shadow-lg p-3 mb-3 rounded") do |new| %>
+    
+    <span style="color:rgb(179, 179, 179)"> 
+    <div class="form-group row mt-4">
+       <%= new.label :user_name, class:"col-2 col-form-table" %>
+        <div class="col-10">
+        <%= new.text_field :user_name, class:"form-control shadow rounded", placeholder:"User name" %></div>
+    </div></span>
+    
+    <span style="color:rgb(179, 179, 179)">
+    <div class="form-group row mt-4">
+        <%= new.label :email, class:"col-2 col-form-table" %>
+        <div class="col-10">
+        <%= new.email_field :email, class:"form-control shadow rounded", placeholder:"User email address" %></div>
+    </div></span>
+
+    <span style="color:rgb(179, 179, 179)">
+    <div class="form-group row mt-4">
+        <%= new.label :password, class:"col-2 col-form-table" %>
+        <div class="col-10">
+        <%= new.password_field :password, class:"form-control shadow rounded", placeholder:"Password" %></div>
+    </div></span>
+    <br>
+       <center> <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
+    <br><br>
+    
+    <h6><%= link_to '< Cancel and return Home >', articles_path,class:"text-success" %></h6>
+<%end%>
+</div>

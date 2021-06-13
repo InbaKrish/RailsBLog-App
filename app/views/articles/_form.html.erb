@@ -1,6 +1,6 @@
 <div class="container ">
 
-<%= render 'shared/errors' %>
+<%= render 'shared/errors', cur_obj:@article %>
 
 <%= form_with(model: @article, local: true, class:"shadow-lg p-3 mb-3 rounded") do |new| %>
     
