@@ -32,12 +32,12 @@
             <div class="col-6">
         <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
             <div class="card-header ">
-               <span style="color:rgb(204, 204, 204)"><i> by Inba </i> </span>
+               <span style="color:rgb(204, 204, 204)"><i> by <%=article.user.user_name%> </i> </span>
             </div>
             <div class="card-body">
-                <h5 class="card-title"> <span style="color:rgb(102, 102, 255)"> <%= link_to article.title, article_path(article) %> </h5>
-                <p class="card-text"> <span style="rgb(166, 166, 166)"> 
-                <%= truncate(article.description,length:120) %> </span></p>
+                <h5 class="card-title "> <%= link_to article.title, article_path(article), class:"text-info" %> </h5>
+                <p class="card-text"> 
+                <%= truncate(article.description,length:120) %> </p>
                 
                 <%= link_to "View", article_path(article) ,class:"btn btn-outline-success"%>&nbsp;&nbsp;
                 <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
