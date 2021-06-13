@@ -12,7 +12,7 @@
         <%= link_to '<< Return Home', articles_path, class:"btn btn-outline-secondary btn-sm shadow rounded" %>
     </p>
     <div class="text-white">
-        <p><h2><%= @article.title %></h2></p>
+        <p><h2><%= @article.title %></h2><small><i>by @<%=@article.user.user_name if @article.user%></i></small></p>
         <pre class="text-white">
             <%= @article.content %>
         <pre>
