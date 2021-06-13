@@ -24,11 +24,9 @@
         <div class="col-10">
         <%= new.text_area :content, class:"form-control shadow rounded", placeholder:"Add your article content", rows:10 %></div>
     </div></span>
-    
-    <div class="form-group row mt-4">
-    <center>
-        <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %></center>
-    </div><br><br>
+    <br>
+       <center> <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
+    <br><br>
     
     <h6><%= link_to '< Cancel and return Home >', articles_path,class:"text-success" %></h6>
 <%end%>
