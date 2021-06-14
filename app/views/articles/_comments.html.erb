@@ -1,5 +1,6 @@
-<%if @comments.length >0%>
-    <% @comments.each do |cmt| %>
-        <%= cmt.content , class:"text-white"%>
-    <%end%>
+<div class="container bot-space">
+<% @article.comments.each do |cmt| %>
+        <div class="well "> &nbsp;&nbsp;&nbsp; <%= cmt.content %> <br>&nbsp;&nbsp;
+        <small> by @<i> <%= User.find(cmt.user).user_name %><i></small> </div>   
 <%end%>
+<div>

@@ -12,12 +12,13 @@
         <%= link_to '<< Return Home', articles_path, class:"btn btn-outline-secondary btn-sm shadow rounded" %>
     </p>
     <div class="text-white">
-        <p><h2><%= @article.title %></h2><small><i>by @<%=@article.user.user_name if @article.user%></i></small></p>
+        <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.user.user_name, user_path(@article.user.id), class:"text-secondary" %></i></small></p>
         <pre class="text-white">
             <%= @article.content %>
         <pre>
-        <%= render "comments" %>
     </div>
+    <h2>comments</h2>
+    <%= render 'comments'%>
     </div>
 </body>
 </html>

@@ -1,0 +1,18 @@
+<div class="container mt-5">
+<% @users.each do |usr|%>
+<div class="row justify-content-md-center">
+        <div class="card text-muted bg-dark mb-5 col-7">
+        <h5 class="card-header text-primary"><%= usr.user_name %>
+            <%= link_to(image_tag("http://assets.stickpng.com/images/580b57fcd9996e24bc43c521.png", class: 'image-responsive'), 
+                'https://www.instagram.com/', target: :_blank) %>
+        </h5>
+            <div class="card-body">
+                <h5 class="card-title"> *Author : <%= usr.user_name %></h5>
+                <p class="card-text"><i>Author email : <%= usr.email %></i></p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to "Profile ", user_path(usr),class:"btn btn-outline-success"  %>
+            </div>
+    </div></div>
+<%end%>
+</div>
+

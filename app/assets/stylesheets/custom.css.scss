@@ -5,7 +5,23 @@
 }
 
 .nav-link{
-    color: white !important;
+    color: rgb(199, 194, 194) !important;
+}
+
+.well{
+    background-color: rgb(187, 186, 184);
+    color: rgb(73, 73, 73);
+    border-radius: 12px;
+}
+
+.image-responsive{
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.bot-space{
+    margin-bottom: 20px;
 }
 
 pre { 
