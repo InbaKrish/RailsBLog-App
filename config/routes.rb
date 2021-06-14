@@ -9,4 +9,11 @@ Rails.application.routes.draw do
   # user routes
   get 'signup' => 'users#new'
   resources :users, except: [:new]
+
+  #user_sessions routes
+  get 'login' => 'usersessions#new'
+  post 'login' => 'usersessions#create'
+  delete 'logout' => 'usersessions#destroy'
+  get 'logout' => 'usersessions#destroy'
+
 end

@@ -24,9 +24,11 @@
         <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </li>
+    <% if session[:cur_uid] %>
     <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete %>
     </li>
+    <%end%>
     </ul>
     <ul class="navbar-nav ms-auto ">
             <%= link_to 'New article',new_article_path, class:"btn btn-outline-success shadow rounded"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
