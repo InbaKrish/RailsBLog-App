@@ -1,0 +1,7 @@
+<div class="container bot-space">
+<%= form_with(model: [@article,@article.comments.build], local: true, class:"form-group") do |new| %>
+    <%= new.text_field :content, class:"form-control shadow rounded" %> <br>
+     <center> <%= new.submit "POST", class:"btn btn-outline-secondary btn-sm shadow rounded" %> </center>
+<%end%>
+</div>
+<div>

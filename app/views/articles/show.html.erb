@@ -17,8 +17,8 @@
             <%= @article.content %>
         <pre>
     </div>
-    <h2>comments</h2>
-    <%= render 'comments'%>
+    <h2> <% @article.comments.count %> comments</h2>
+    <%= render "comments" %>
     </div>
 </body>
 </html>
