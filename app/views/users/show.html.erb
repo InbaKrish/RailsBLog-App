@@ -24,8 +24,15 @@
 <body>
     <center>
         <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> <%=@user.user_name%>'s articles </span></h1><br>
-        <%= render 'articles/showarticles' if @articles.length > 0 %>
-        <%= render 'nocontent' if @articles.length <= 0 %>
+        <% if cur_user == @user%>
+        <%= link_to "Edit Profile", edit_user_path(@user),class:"btn btn-outline-secondary" %><br>
+        <%end%>
+        <% if @articles.length > 0 %>
+            <%= render 'articles/showarticles' %>
+        <%else%>
+            <br>
+            <h1 style="color:rgb(115, 115, 115);">No Articles Available</h1>
+        <%end%>
     </center>
 </body>
 </html>

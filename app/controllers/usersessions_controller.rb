@@ -3,7 +3,7 @@ class UsersessionsController < ApplicationController
 
     end
     def create 
-        cur_user = User.find_by(email: params[:usersessions][:email])
+        cur_user = User.find_by(email: params[:usersessions][:email].downcase())
         if cur_user && cur_user.authenticate(params[:usersessions][:password])
             session[:cur_uid] = cur_user.id
             flash[:notice] = "Successfully , Logged In !"

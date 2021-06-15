@@ -14,9 +14,10 @@
                 <p class="card-text"> 
                 <%= truncate(article.description,length:120) %> </p>
                 
-                <%= link_to "View", article_path(article) ,class:"btn btn-outline-success"%>&nbsp;&nbsp;
+                <% if cur_user && cur_user == article.user %>
                 <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
                 <%=  link_to 'Delete', articles_delete_path(article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
+                <%end%>
             </div>
             <div class="card-footer text-muted">
                 <small>Created <%= time_ago_in_words(article.created_at)%> ago ,
