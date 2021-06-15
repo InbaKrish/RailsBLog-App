@@ -19,6 +19,10 @@
     </div>
     <h2> <% @article.comments.count %> comments</h2>
     <%= render "comments" %>
+    <%  if cur_user %>
+        <h5>Add your comment </h5>
+        <%= render "addcomment" %>
+    <%end%>
     </div>
 </body>
 </html>

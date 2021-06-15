@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root "pages#home"
 
   #article routes
-  resources :articles, except: [:destroy]
+  resources :articles, except: [:destroy] do
+    resources :comments
+  end
   delete 'articles/:id/delete' => 'articles#destroy', as: 'articles_delete'
   get '/articles/:id/delete' => 'articles#destroy'
 

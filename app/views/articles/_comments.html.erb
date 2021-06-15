@@ -1,6 +1,6 @@
 <div class="container bot-space">
 <% @article.comments.each do |cmt| %>
         <div class="well "> &nbsp;&nbsp;&nbsp; <%= cmt.content %> <br>&nbsp;&nbsp;
-        <small> by @<i> <%= User.find(cmt.user).user_name %><i></small> </div>   
-<%end%>
+        <small> by @<i> <%= User.find(cmt.user_id).user_name %><i></small> <br></div> <br>
+<%end%> 
 <div>
