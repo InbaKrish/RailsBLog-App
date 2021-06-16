@@ -26,7 +26,8 @@
     </ul>
     <ul class="navbar-nav ms-auto ">
     <%if cur_user%>
-            <%= link_to 'New article',new_article_path, class:"btn btn-outline-success shadow rounded"  %>
+            <%= link_to 'New article',new_article_path, class:"btn btn-outline-success shadow rounded"  %> &nbsp;&nbsp;
+            <%= link_to "Saved Articles", user_savedarticles_path(user_id: cur_user.id) ,class:"btn btn-outline-info shadow rounded" %>
     <%end%>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <p><sub> <%= link_to '@inbasagaran', "https://www.linkedin.com/in/inbasagaran/", class:"text-secondary", target: :_blank %> </sub></p> &nbsp;&nbsp;&nbsp;

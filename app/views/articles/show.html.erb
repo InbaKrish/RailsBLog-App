@@ -9,7 +9,14 @@
 <body>
     <div class="container">
     <p>
-        <%= link_to '<< Return Home', articles_path, class:"btn btn-outline-secondary btn-sm shadow rounded" %>
+        <%= link_to '<< Return Home', articles_path, class:"btn btn-outline-secondary btn-sm shadow rounded" %> &nbsp;
+        <%if cur_user%>
+            <% if already_saved(@article.id) %>
+                <%= link_to 'Remove from saved',removefromsaved_path(:article_id => @article.id), method: :delete, class:"btn btn-outline-danger btn-sm shadow rounded" %> 
+            <% else %>
+                <%= link_to 'Save_article', savearticle_path(:article_id => @article.id), class:"btn btn-outline-muted btn-sm shadow rounded" %>
+            <% end %>
+        <%end%>
     </p>
     <div class="text-white">
         <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.user.user_name, user_path(@article.user.id), class:"text-secondary" %></i></small></p>

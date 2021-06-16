@@ -1,0 +1,7 @@
+<center><h2> <%= cur_user.user_name %>'s - Saved Articles </h2></center>
+<% if @articles.length >0 %>
+    <%= render 'articles/showarticles' %>
+<%else%>
+    <br><br><br><br><br><br><br><br> <center>
+    <h1 class="text-muted"> No articles available</h1> </center>
+<%end%>
