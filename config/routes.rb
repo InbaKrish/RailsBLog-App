@@ -10,10 +10,13 @@ Rails.application.routes.draw do
 
   # user routes
   get 'signup' => 'users#new'
-  resources :users, except: [:new] do
+  resources :users, except: [:new, :destroy] do
     resources :savedarticles, except: [:new, :destroy]
   end
+  delete '/users/:id/delete' => 'users#destroy', as: 'delete_user'
+  get '/users/:id/delete' => 'users#destroy'
 
+  #savedarticles routes
   get '/articles/:article_id/savedarticles/new' => 'savedarticles#create', as: 'savearticle'
   delete '/articles/:article_id/removesaved' => 'savedarticles#destroy', as: 'removefromsaved'
   get '/articles/:article_id/removesaved' => 'savedarticles#destroy'

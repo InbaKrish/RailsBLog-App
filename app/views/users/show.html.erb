@@ -26,7 +26,8 @@
         <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> <%=@user.user_name%>'s articles </span></h1><br>
         <% if cur_user == @user%>
         <%= link_to "Saved Articles", user_savedarticles_path(user_id: @user.id) ,class:"btn btn-outline-info" %> &nbsp;
-        <%= link_to "Edit Profile", edit_user_path(@user),class:"btn btn-outline-warning" %> 
+        <%= link_to "Edit Profile", edit_user_path(@user),class:"btn btn-outline-warning" %> &nbsp;
+        <%= link_to "Delete Profile", delete_user_path(:id => @user.id),class:"btn btn-outline-danger",method: :delete, data: { confirm: "Are you sure to DELETE ?"} %> 
         <%end%>
         <% if @articles.length > 0 %>
             <%= render 'articles/showarticles' %>

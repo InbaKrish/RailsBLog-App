@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:edit, :update, :show]
-        before_action :require_login, only: [:edit, :update ]
-        before_action :check_cur_user, only: [:edit, :update ]
+    before_action :set_user, only: [:edit, :update, :show, :destroy]
+    before_action :require_login, only: [:edit, :update ]
+    before_action :check_cur_user, only: [:edit, :update, :destroy ]
 
     def new
         @user = User.new
@@ -37,6 +37,13 @@ class UsersController < ApplicationController
             render 'new'
         end
     end
+    def destroy
+        @user.destroy
+        session[:cur_uid] = nil
+        flash[:alert] = "Your profile and Your Articles DESTROYED , Successfully !!!"
+        redirect_to root_path
+    end
+
 
     private
     def set_user
