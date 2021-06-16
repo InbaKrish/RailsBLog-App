@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
 
     before_action :set_article, only: [:show, :edit, :update, :destroy]
+    before_action :require_login , except: [:show, :index]
+    before_action :check_user , only: [:edit, :update, :destroy]
 
     def show
     end
@@ -49,5 +51,12 @@ class ArticlesController < ApplicationController
 
     def set_article
         @article = Article.find(params[:id])
+    end
+
+    def check_user
+        if cur_user != @article.user 
+            flash[:alert] = "You are not the owner of this Article !!!"
+            redirect_to root_path
+        end
     end
 end

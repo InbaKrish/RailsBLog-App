@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:edit, :update, :show]
+        before_action :require_login, only: [:edit, :update ]
+        before_action :check_cur_user, only: [:edit, :update ]
 
     def new
         @user = User.new
@@ -42,5 +44,11 @@ class UsersController < ApplicationController
     end
     def user_params
         params.require(:user).permit(:user_name,:email,:password)
+    end
+    def check_cur_user
+        if cur_user != @user
+            flash[:alert] = "You are not the owner of this Profile !!!"
+            redirect_to user_path(@user)
+        end
     end
 end
