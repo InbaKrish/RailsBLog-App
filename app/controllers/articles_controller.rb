@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    before_action :require_login , except: [:show, :index]
+    before_action :authenticate_author! , except: [:show, :index]
     before_action :check_user , only: [:edit, :update, :destroy]
 
     def show
@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        @article.user = cur_user
+        @article.author_id = current_author.id
         if @article.save
             flash[:notice] = "Article created successfully"
             redirect_to @article
@@ -54,9 +54,10 @@ class ArticlesController < ApplicationController
     end
 
     def check_user
-        if cur_user != @article.user 
+        if current_author != @article.author
             flash[:alert] = "You are not the owner of this Article !!!"
-            redirect_to root_path
+            redirect_to articles_path
         end
+        return true
     end
 end

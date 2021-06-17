@@ -1,40 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rails Blog</title>
-    <style>
-    table{
-        border-spacing: 5px
-    }
-    #t01 tr:nth-child(even) {
-    background-color: #eee;
-    }
-    #t01 tr:nth-child(odd) {
-    background-color: #fff;
-    }
-    #t01 th {
-    color: white;
-    background-color: black;
-    }
-    </style>
-</head>
-<body>
-    <center>
-        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> <%=@user.user_name%>'s articles </span></h1><br>
-        <% if cur_user == @user%>
-        <%= link_to "Saved Articles", user_savedarticles_path(user_id: @user.id) ,class:"btn btn-outline-info" %> &nbsp;
-        <%= link_to "Edit Profile", edit_user_path(@user),class:"btn btn-outline-warning" %> &nbsp;
-        <%= link_to "Delete Profile", delete_user_path(:id => @user.id),class:"btn btn-outline-danger",method: :delete, data: { confirm: "Are you sure to DELETE ?"} %> 
-        <%end%>
-        <% if @articles.length > 0 %>
-            <%= render 'articles/showarticles' %>
-        <%else%>
-            <br><br><br><br><br><br>
-            <h1 style="color:rgb(115, 115, 115);">No Articles Available</h1>
-        <%end%>
-    </center>
-</body>
-</html>
+<center>
+    <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> <%=@user.username%>'s articles </span></h1><br>
+    <% if current_author == @user%>
+    <%= link_to "Saved Articles", savedarticles_path(author_id: current_author.id) ,class:"btn btn-outline-info" %> &nbsp;
+    <%= link_to "Delete Profile", delete_user_path(author_id: current_author.id),method: :delete ,class:"btn btn-outline-danger" %>
+    <%end%>
+    <% if @articles.length > 0 %>
+        <%= render 'articles/showarticles' %>
+    <%else%>
+        <br><br><br><br><br><br>
+        <h1 style="color:rgb(115, 115, 115);">No Articles Available</h1>
+    <%end%>
+</center>

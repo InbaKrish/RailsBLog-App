@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
     def home
-        redirect_to articles_path if cur_user
+        redirect_to articles_path if current_author
     end
     def about
     end

@@ -10,24 +10,27 @@
     <li class="nav-item active">
         <%= link_to "Articles", articles_path,class:"nav-link "  %>
     </li>
+    <li class="nav-item active">
+        <%= link_to "Authors", users_path,class:"nav-link "  %>
+    </li>
 
-    <% if cur_user %>
+    <% if author_signed_in? %>
         <li class="nav-item">
-            <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete %>
+            <%= link_to 'Logout', destroy_authsession_path,  class: "nav-link" %>
         </li>
         <li class="nav-item">
-            <i><%= link_to "@"+cur_user.user_name, user_path(cur_user.id), class: "nav-link"%></i>
+            <i><%= link_to "@"+current_author.username, user_path(current_author.id), class: "nav-link"%></i>
         </li>
     <%else%>
         <li class="nav-item">
-            <%= link_to "Log In", login_path, class:"nav-link" %>
+            <%= link_to "Log In", new_author_session_path, class:"nav-link" %>
         </li>
     <%end%>
     </ul>
     <ul class="navbar-nav ms-auto ">
-    <%if cur_user%>
+    <%if current_author%>
             <%= link_to 'New article',new_article_path, class:"btn btn-outline-success shadow rounded"  %> &nbsp;&nbsp;
-            <%= link_to "Saved Articles", user_savedarticles_path(user_id: cur_user.id) ,class:"btn btn-outline-info shadow rounded" %>
+            <%= link_to "Saved Articles", savedarticles_path(author_id: current_author.id) ,class:"btn btn-outline-info shadow rounded" %> &nbsp;&nbsp;
     <%end%>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <p><sub> <%= link_to '@inbasagaran', "https://www.linkedin.com/in/inbasagaran/", class:"text-secondary", target: :_blank %> </sub></p> &nbsp;&nbsp;&nbsp;

@@ -6,7 +6,7 @@
             <div class="col-6">
         <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
             <div class="card-header text-white">
-               <i> by @<%= link_to article.user.user_name, user_path(article.user.id), class:"text-secondary" %> </i> 
+               <i> by @<%= link_to article.author.username, user_path(article.author.id), class:"text-secondary" %> </i> 
                
             </div>
             <div class="card-body">
@@ -14,7 +14,7 @@
                 <p class="card-text"> 
                 <%= truncate(article.description,length:120) %> </p>
                 
-                <% if cur_user && cur_user == article.user %>
+                <% if current_author && current_author == article.author %>
                 <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
                 <%=  link_to 'Delete', articles_delete_path(article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
                 <%end%>

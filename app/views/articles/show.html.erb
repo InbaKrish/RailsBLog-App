@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articls</title>
-</head>
-<body>
-    <div class="container">
+<div class="container">
     <p>
         <%= link_to '<< Return Home', articles_path, class:"btn btn-outline-secondary btn-sm shadow rounded" %> &nbsp;
-        <%if cur_user%>
+        <%if current_author%>
             <% if already_saved(@article.id) %>
                 <%= link_to 'Remove from saved',removefromsaved_path(:article_id => @article.id), method: :delete, class:"btn btn-outline-danger btn-sm shadow rounded" %> 
             <% else %>
-                <%= link_to 'Save_article', savearticle_path(:article_id => @article.id), class:"btn btn-outline-muted btn-sm shadow rounded" %>
+                <%= link_to 'Save_article', savearticle_path(:article_id => @article.id), class:"btn btn-outline-muted btn-sm shadow rounded text-muted" %>
             <% end %>
         <%end%>
     </p>
     <div class="text-white">
-        <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.user.user_name, user_path(@article.user.id), class:"text-secondary" %></i></small></p>
+        <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.author.username, user_path(@article.author.id), class:"text-secondary" %></i></small></p>
         <pre class="text-white">
             <%= @article.content %>
         <pre>
     </div>
-    <h2> <% @article.comments.count %> comments</h2>
+    <h2> <%= @article.comments.count %> Comments</h2>
     <%= render "comments" %>
-    <%  if cur_user %>
+    <%  if current_author %>
         <h5>Add your comment </h5>
         <%= render "addcomment" %>
     <%end%>
-    </div>
-</body>
-</html>
+</div>

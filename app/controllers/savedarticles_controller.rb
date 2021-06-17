@@ -1,8 +1,8 @@
 class SavedarticlesController < ApplicationController
-    before_action :require_login 
+    before_action :author_signed_in?
 
     def create
-        @user = cur_user
+        @user = current_author
         @save_article = @user.savedarticles.new
         @save_article.article_id = params[:article_id]
         @save_article.save
@@ -10,7 +10,7 @@ class SavedarticlesController < ApplicationController
         redirect_to article_path(params[:article_id])
     end
     def index 
-        @user = cur_user
+        @user = current_author
         @articles = @user.savedarticles
         @articles = @articles.map{ |sa| Article.find(sa.article_id) }
     end

@@ -1,18 +1,14 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:edit, :update, :show, :destroy]
-    before_action :require_login, only: [:edit, :update ]
-    before_action :check_cur_user, only: [:edit, :update, :destroy ]
-
-    def new
-        @user = User.new
-    end
+    before_action :author_signed_in?  , only: [:edit, :update ]
+    before_action :authenticate_author!, only: [:edit, :update, :destroy ]
 
     def show
         @articles = @user.articles
     end
 
     def index
-        @users = User.all
+        @users = Author.all
     end
 
     def edit
@@ -27,19 +23,8 @@ class UsersController < ApplicationController
         end
     end
 
-    def create
-        @user = User.new(user_params)
-        if @user.save
-            session[:cur_uid] = @user.id
-            flash[:notice] = "#{@user.user_name} Signed Up Successfully..."
-            redirect_to articles_path
-        else
-            render 'new'
-        end
-    end
     def destroy
         @user.destroy
-        session[:cur_uid] = nil
         flash[:alert] = "Your profile and Your Articles DESTROYED , Successfully !!!"
         redirect_to root_path
     end
@@ -47,7 +32,7 @@ class UsersController < ApplicationController
 
     private
     def set_user
-        @user = User.find(params[:id])
+        @user = Author.find(params[:id])
     end
     def user_params
         params.require(:user).permit(:user_name,:email,:password)
