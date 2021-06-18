@@ -3,6 +3,12 @@
         <div class="well "> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> 
          "<%= cmt.content %>" <br>&nbsp;&nbsp;
-        <small> by @<i> <%= User.find(cmt.user_id).user_name %><i></small> <br></div> <br>
+        <small> by @<i> <%= User.find(cmt.user_id).user_name %><i></small> 
+        <% if cmt.user_id == current_author.id %>&nbsp;&nbsp;&nbsp;
+           <small><%= link_to "Remove", delete_comment_path(article_id: @article.id),method: :delete,
+                class:"text-danger" %> </small>
+        <%end%>
+        <br></div> <br>
+
 <%end%> 
 <div>

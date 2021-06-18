@@ -8,10 +8,12 @@ Rails.application.routes.draw do
 
   #article routes
   resources :articles, except: [:destroy] do
-    resources :comments
+    resources :comments, except: :destroy
   end
   delete 'articles/:id/delete' => 'articles#destroy', as: 'articles_delete'
   get '/articles/:id/delete' => 'articles#destroy'
+  #delete '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
+  get '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
 
   # user routes
   get 'signup' => 'users#new'
