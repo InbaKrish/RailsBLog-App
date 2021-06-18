@@ -11,6 +11,11 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title "> <%= link_to article.title, article_path(article), class:"text-info" %> </h5>
+            <center>
+            <%= article.likes.count %> <%= (article.likes.count) <= 1 ? 'Like' : 'Likes'%>
+            <%= link_to(image_tag("https://lh3.googleusercontent.com/proxy/GIMeNBDGDYkVnm1XZ-gZyODbyXfYmqYIULe2bCpoYpbK-uoT08Tz-dk7zDMrJqQJ7lYXGrrBFMPSV636Yy_QDHAZTxT85nySvMayboZ7uqoyq4qHQzEMU4tYN7IMHd0yqA",
+             class: 'image-responsive'), 
+                like_path(article_id: article.id), method: :post )%></center>  
                 <p class="card-text"> 
                 <%= truncate(article.description,length:120) %> </p>
                 

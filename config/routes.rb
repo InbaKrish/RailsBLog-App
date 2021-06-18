@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/articles/:id/delete' => 'articles#destroy'
   #delete '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
   get '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
+  get '/articles/:article_id/like' => 'likes#create', as: 'like'
 
   # user routes
   get 'signup' => 'users#new'
