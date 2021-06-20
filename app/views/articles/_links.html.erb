@@ -1,0 +1,20 @@
+<center>
+<%= article.likes.count %> <%= (article.likes.count) <= 1 ? 'Like' : 'Likes'%>
+<%= link_to(image_tag("https://image.flaticon.com/icons/png/512/725/725111.png",
+    class: 'image-responsive'), 
+    like_path(article_id: article.id), method: :post )%>
+&nbsp;
+<%if current_author%>
+    <% if already_saved(article.id) %>
+        <%= "|  Unsave"%>
+        <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/709/709631.png",
+    class: 'image-responsive'),
+        removefromsaved_path(:article_id => article.id), method: :delete) %> 
+    <% else %>
+        <%= "|  Save"%>
+        <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/709/709496.png",
+    class: 'image-responsive'), 
+        savearticle_path(:article_id => article.id)) %>
+    <% end %>
+<%end%>
+</center>  

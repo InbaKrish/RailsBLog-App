@@ -1,32 +1,28 @@
 <% 
         articles = @articles.sort_by { |t| [t.updated_at , t.created_at]}.reverse
-        articles.each do |article| %>
+        articles.each do |cur_article| %>
             <br><br>
             <div class="row justify-content-md-center">
             <div class="col-6">
         <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
             <div class="card-header text-white">
-               <i> by @<%= link_to article.author.username, user_path(article.author.id), class:"text-secondary" %> </i> 
+               <i> by @<%= link_to cur_article.author.username, user_path(cur_article.author.id), class:"text-secondary" %> </i> 
                
             </div>
             <div class="card-body">
-                <h5 class="card-title "> <%= link_to article.title, article_path(article), class:"text-info" %> </h5>
-            <center>
-            <%= article.likes.count %> <%= (article.likes.count) <= 1 ? 'Like' : 'Likes'%>
-            <%= link_to(image_tag("https://lh3.googleusercontent.com/proxy/GIMeNBDGDYkVnm1XZ-gZyODbyXfYmqYIULe2bCpoYpbK-uoT08Tz-dk7zDMrJqQJ7lYXGrrBFMPSV636Yy_QDHAZTxT85nySvMayboZ7uqoyq4qHQzEMU4tYN7IMHd0yqA",
-             class: 'image-responsive'), 
-                like_path(article_id: article.id), method: :post )%></center>  
+                <h5 class="card-title "> <%= link_to cur_article.title, article_path(cur_article), class:"text-info" %> </h5>
+                <%= render 'articles/links', article: cur_article %>
                 <p class="card-text"> 
-                <%= truncate(article.description,length:120) %> </p>
+                <%= truncate(cur_article.description,length:120) %> </p>
                 
-                <% if current_author && current_author == article.author %>
-                <%= link_to "Edit", edit_article_path(article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
-                <%=  link_to 'Delete', articles_delete_path(article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
+                <% if current_author && current_author == cur_article.author %>
+                <%= link_to "Edit", edit_article_path(cur_article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
+                <%=  link_to 'Delete', articles_delete_path(cur_article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
                 <%end%>
             </div>
             <div class="card-footer text-muted">
-                <small>Created <%= time_ago_in_words(article.created_at)%> ago ,
-                Updated <%= time_ago_in_words(article.updated_at)%> ago
+                <small>Created <%= time_ago_in_words(cur_article.created_at)%> ago ,
+                Updated <%= time_ago_in_words(cur_article.updated_at)%> ago
                 </small>
             </div>
             </div></div></div>
