@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
     before_action :set_article
     before_action :author_signed_in?
+    before_action :authenticate_author!, only: [:create, :destroy]
 
     def new
     end

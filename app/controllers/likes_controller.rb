@@ -1,8 +1,8 @@
 class LikesController < ApplicationController
     before_action :set_article
+    before_action :author_signed_in?
 
     def new
-
     end
     def create 
         if already_liked?

@@ -1,10 +1,10 @@
 <center>
 <%= article.likes.count %> <%= (article.likes.count) <= 1 ? 'Like' : 'Likes'%>
+<%if current_author%>
 <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/725/725111.png",
     class: 'image-responsive'), 
     like_path(article_id: article.id), method: :post )%>
 &nbsp;
-<%if current_author%>
     <% if already_saved(article.id) %>
         <%= "|  Unsave"%>
         <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/709/709631.png",

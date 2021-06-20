@@ -1,7 +1,7 @@
 class Author < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :savedarticles, dependent: :delete_all
-  has_many :likes, dependent: :destroy
+  has_many :likes, dependent: :delete_all
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

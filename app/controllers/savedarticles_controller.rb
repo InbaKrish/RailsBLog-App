@@ -1,5 +1,6 @@
 class SavedarticlesController < ApplicationController
     before_action :author_signed_in?
+    before_action :authenticate_author!
 
     def create
         @user = current_author
