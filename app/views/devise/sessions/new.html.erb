@@ -19,7 +19,7 @@
         <div class="col-10">
         <%= new.password_field :password, class:"form-control shadow rounded", placeholder:"Enter your Password",
         autocomplete: "current-password" %></div>
-    </div>
+    </div><br>
     <% if devise_mapping.rememberable? %>
         <div class="field">
         <%= new.check_box :remember_me %>
@@ -28,7 +28,7 @@
     <% end %>
     </span>
     <br><div class="actions">
-       <center> <%= new.submit "Login", class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
+       <center> <%= new.submit "Login", class:"btn btn-outline-success btn-lg shadow rounded" %> </center>
        </div>
     <br><br>
     <%= render "devise/shared/links" %>

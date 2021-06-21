@@ -1,5 +1,5 @@
 <center>
-<%= article.likes.count %> <%= (article.likes.count) <= 1 ? 'Like' : 'Likes'%>
+<%= article.likes.count %> <%= (article.likes.count) == 1 ? 'Like' : 'Likes'%>
 <%if current_author%>
 <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/725/725111.png",
     class: 'image-responsive'), 
