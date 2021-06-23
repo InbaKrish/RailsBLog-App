@@ -9,10 +9,9 @@ ActiveAdmin.register Article do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:title, :description, :content, :author_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  permit_params :title, :description, :author_id
+  permit_params do
+    permitted = [:title, :description, :author_id]
+    permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
 end
