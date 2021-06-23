@@ -29,4 +29,17 @@ Rails.application.routes.draw do
   get '/author/:author_id/savedarticles' => 'savedarticles#index', as: 'savedarticles'
   get '/articles/:article_id/removesaved' => 'savedarticles#destroy'
 
+  #api routes
+  Rails.application.routes.draw do 
+    namespace :api do
+      namespace :v1 do
+        resources :authors 
+      end
+    end
+  end
+  get '/api/v1/articles' => 'api/v1/articles#all_articles'
+  get '/api/v1/articles/:id' => 'api/v1/articles#show'
+  post '/api/v1/articles/new' => 'api/v1/articles#create'
+  get '/api/v1/authors/:id/articles' => 'api/v1/articles#index'
+
 end
