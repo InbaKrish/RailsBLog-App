@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :authors, except: [:destroy]
   root "pages#home"
 
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
 
   #api routes
   Rails.application.routes.draw do 
+  use_doorkeeper
     namespace :api do
       namespace :v1 do
         resources :authors 
@@ -42,4 +44,10 @@ Rails.application.routes.draw do
   post '/api/v1/articles/new' => 'api/v1/articles#create'
   get '/api/v1/authors/:id/articles' => 'api/v1/articles#index'
 
+  #doorkeeper routes
+  Rails.application.routes.draw do
+    use_doorkeeper do
+      skip_controllers :authorizations, :applications, :authorized_applications
+    end
+  end
 end

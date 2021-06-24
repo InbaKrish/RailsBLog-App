@@ -1,6 +1,7 @@
 class Api::V1::ArticlesController < ApplicationController
     before_action :set_article, only: [ :show]
     protect_from_forgery with: :null_session
+    before_action :doorkeeper_authorize!
 
     #all users json
     def all_articles
