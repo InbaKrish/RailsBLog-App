@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.1'
-
+gem 'solargraph'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 # Use Postgres as the database for Active Record
@@ -27,7 +27,7 @@ gem 'dotenv-rails'
 gem 'doorkeeper', '~> 5.4.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'rexml'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -60,3 +60,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+group :development, :test do
+  gem 'rspec-rails'
+end
