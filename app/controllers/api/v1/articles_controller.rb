@@ -2,6 +2,7 @@ class Api::V1::ArticlesController < ApplicationController
     before_action :set_article, only: [ :show]
     protect_from_forgery with: :null_session
     before_action :doorkeeper_authorize!
+    before_action :current_author, only: [:create]
 
     #all users json
     def all_articles
@@ -28,8 +29,11 @@ class Api::V1::ArticlesController < ApplicationController
             render json: @article.errors
         end
     end
-
+    
     private
+    def current_author
+        Author.find(doorkeeper_token.resource_owner_id)
+    end
 
     def article_params
         params.permit(:title,:description,:content)
