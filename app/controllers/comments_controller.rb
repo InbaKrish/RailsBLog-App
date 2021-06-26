@@ -8,9 +8,13 @@ class CommentsController < ApplicationController
     def create
         @comment = @article.comments.create(params.require(:comment).permit(:content))
         @comment.user_id = current_author.id
-        @comment.save
-        flash[:notice] = "Comment Posted successfully !!!"
-        redirect_to article_path(@article)
+        if @comment.save
+            flash[:notice] = "Comment Posted successfully !!!"
+            redirect_to article_path(@article)
+        else
+            flash[:notice] = "Error posting comment, retry !!!"
+            redirect_to article_path(@article)
+        end
     end
     def destroy 
         @comment = Comment.find_by(user_id:current_author.id,article_id:params[:article_id])
