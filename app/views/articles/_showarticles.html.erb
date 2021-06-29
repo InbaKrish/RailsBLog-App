@@ -1,6 +1,4 @@
-<% 
-        articles = @articles.sort_by { |t| [t.updated_at , t.created_at]}.reverse
-        articles.each do |cur_article| %>
+<% @articles.each do |cur_article| %>
             <br><br>
             <div class="row justify-content-md-center">
             <div class="col-6">

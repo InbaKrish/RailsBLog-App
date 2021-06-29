@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
     def show
     end
     def index
-        @articles = Article.all
+        @articles = Article.all.order(updated_at: :desc).includes(:author)
     end
 
     def new
