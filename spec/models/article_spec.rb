@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Article, type: :model do
     #dummy data for testing
     before{
-        @test_user = Author.first_or_create!(email: 'rspectest@example.com', password: 'password', password_confirmation: 'password')
+        @test_user = create(:author)
     }
     dummy_content ="Ruby on Rails, or Rails, is a server-side web application framework written in Ruby under the MIT License. 
     Rails is a model–view–controller (MVC) framework, providing default structures for a database, a web service, and web pages. 
