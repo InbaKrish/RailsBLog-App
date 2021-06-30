@@ -9,7 +9,14 @@ class ArticlesController < ApplicationController
     def index
         @articles = Article.all.order(updated_at: :desc).includes(:author)
     end
-
+    def search
+        if params[:search].blank? 
+            redirect_to articles_path
+        else
+            @key = params[:search][0].downcase
+            @articles = Article.all.where("lower(title) LIKE :search", search: "%#{@key}%").includes(:author)
+        end
+    end
     def new
         @article = Article.new
     end
