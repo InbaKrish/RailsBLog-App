@@ -24,6 +24,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
+        @user_comments = Comment.where("user_id = ?",@user.id)
+        @user_comments.delete_all
         @user.destroy
         flash[:alert] = "Your profile and Your Articles DESTROYED , Successfully !!!"
         redirect_to root_path

@@ -46,6 +46,8 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
+        @saved_articles = Savedarticle.where("article_id = ?",@article.id)
+        @saved_articles.delete_all()
         @article.destroy()
         redirect_to articles_path
     end
