@@ -28,7 +28,7 @@
     <%end%>
     </ul>
     <ul class="navbar-nav ms-auto ">
-    <% if current_page?(articles_path) or current_page?(search_path) %>
+    <% if current_page?(articles_path) %>
         <%= form_tag( search_path , method: :get) do |f| %>
             <div class="input-group form-inline mt-1">
                 <%= search_field :search, params[:search], placeholder: " Search Articles", class:"form-comtrol shadow rounded" %>
