@@ -5,9 +5,15 @@ class ArticlesController < ApplicationController
     before_action :check_user , only: [:edit, :update, :destroy]
 
     def show
+        if current_author
+            @view = @article.views.new(author_id: current_author.id)
+            if @view.valid?
+                @view.save 
+            end
+        end
     end
     def index
-        @articles = Article.all.order(updated_at: :desc).includes(:author)
+        @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author)
     end
     def search
         if params[:search].blank? 

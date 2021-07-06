@@ -15,7 +15,7 @@
                 
                 <% if current_author && current_author == cur_article.author %>
                 <%= link_to "Edit", edit_article_path(cur_article) ,class:"btn btn-outline-warning"%>&nbsp;&nbsp;
-                <%=  link_to 'Delete', articles_delete_path(cur_article), method: :delete, confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger"%>
+                <%=  link_to 'Delete', articles_delete_path(cur_article), confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger", method: :delete%>
                 <%end%>
             </div>
             <div class="card-footer text-muted">

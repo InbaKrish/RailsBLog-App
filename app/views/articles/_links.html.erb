@@ -1,11 +1,12 @@
 <center>
+<%= article.views.count %> <%= (article.views.count) == 1 ? 'View' : 'Views'%> <br>
 <%= article.likes.count %> <%= (article.likes.count) == 1 ? 'Like' : 'Likes'%>
 <%if current_author%>
 <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/725/725111.png",
     class: 'image-responsive'), 
     like_path(article_id: article.id), method: :post )%>
 &nbsp;
-    <% if already_saved(article.id) %>
+    <% if article.already_saved(current_author) %>
         <%= "|  Unsave"%>
         <%= link_to(image_tag("https://image.flaticon.com/icons/png/512/709/709631.png",
     class: 'image-responsive'),
