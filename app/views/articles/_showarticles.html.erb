@@ -9,6 +9,11 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title "> <%= link_to cur_article.title, article_path(cur_article), class:"text-info" %> </h5>
+
+                <% if cur_article.categories.any? %>
+                    <div class="mt-2"><%= render cur_article.categories %></div> 
+                <%end%>
+
                 <%= render 'articles/links', article: cur_article %>
                 <p class="card-text"> 
                 <%= truncate(cur_article.description,length:120) %> </p>
@@ -18,6 +23,7 @@
                 <%=  link_to 'Delete', articles_delete_path(cur_article), confirm: "Are you sure to delete?" ,class:"btn btn-outline-danger", method: :delete%>
                 <%end%>
             </div>
+            
             <div class="card-footer text-muted">
                 <small>Created <%= time_ago_in_words(cur_article.created_at)%> ago ,
                 Updated <%= time_ago_in_words(cur_article.updated_at)%> ago

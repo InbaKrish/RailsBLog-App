@@ -4,6 +4,9 @@ class Article < ApplicationRecord
     has_many :likes, dependent: :delete_all
     has_many :views, dependent: :delete_all
 
+    has_many :article_categories
+    has_many :categories, through: :article_categories
+
     validates :title , presence: true,uniqueness: true, length: {minimum: 6, maximum: 80}
     validates :description, presence: true, length: {minimum: 15, maximum: 600}
     validates :content, presence: true, length: {minimum: 400}

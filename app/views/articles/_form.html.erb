@@ -23,8 +23,19 @@
         <%= new.label :content, class:"col-2 col-form-table" %>
         <div class="col-10">
         <%= new.text_area :content, class:"form-control shadow rounded", placeholder:"Add your article content", rows:10 %></div>
+    </div></span><hr>
+    <span style="color:rgb(179, 179, 179)">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= "Choose the categories (can be multiple or can be empty )"%>
+    <div class="form-group row mt-4">
+        <%= new.label :category, class:"col-2 col-form-table" %>
+        <div class="col-10 text-white">
+            <%= new.collection_check_boxes :category_ids, Category.all, :id, :name do |cg| %>
+                <%= cg.label(class: "form-check-label") {cg.check_box(class: "form-check-input shadow") +"  "+ cg.text  } %>
+                <%= "  " %>
+            <% end %>
     </div></span>
-    <br>
+    <br><br><br>
        <center> <%= new.submit class:"btn btn-outline-light btn-lg shadow rounded" %> </center>
     <br><br>
     

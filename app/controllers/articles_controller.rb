@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
         end
     end
     def index
-        @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author)
+        @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author,:article_categories)
         #@all_articles = Article.all
         respond_to do |format|
             format.html
@@ -74,7 +74,7 @@ class ArticlesController < ApplicationController
     private
 
     def article_params
-        params.require(:article).permit(:title,:description,:content)
+        params.require(:article).permit(:title,:description,:content,category_ids: [] )
     end
 
     def set_article
