@@ -11,6 +11,14 @@ class ArticlesController < ApplicationController
                 @view.save 
             end
         end
+
+        respond_to do |format|
+            format.html
+            format.pdf do
+              render pdf: "#{@article.title}-by #{@article.author.username}-PDF", template: "articles/articlepdf.html.erb",
+                 layout: 'pdf.html'
+            end
+        end
     end
     def index
         @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author)
