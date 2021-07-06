@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+categories = %w{food fashion health fitness technology business DIY sports finance art music movie personal book studies career electronics electricals}
+categories.each do |category|
+    Category.create(name: category.capitalize)
+end
