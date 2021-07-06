@@ -8,6 +8,17 @@ class Article < ApplicationRecord
     validates :description, presence: true, length: {minimum: 15, maximum: 600}
     validates :content, presence: true, length: {minimum: 400}
 
+    def self.to_csv
+        attributes = %w{id title description}
+
+        CSV.generate(headers: true) do |csv|
+            csv << attributes
+            all.each do |article|
+                csv << article.attributes.values_at(*attributes)
+            end
+        end
+    end
+
     def already_saved(current_author)
         articles = current_author.savedarticles
         #articles = articles.map{ |obj| obj.article_id }

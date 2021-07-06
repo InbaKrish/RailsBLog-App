@@ -14,6 +14,11 @@ class ArticlesController < ApplicationController
     end
     def index
         @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author)
+        #@all_articles = Article.all
+        respond_to do |format|
+            format.html
+            format.csv { send_data Article.all.to_csv, filename: "articles-#{Date.today}.csv" }
+        end
     end
     def search
         if params[:search].blank? 
