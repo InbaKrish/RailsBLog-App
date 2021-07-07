@@ -1,6 +1,17 @@
+<center>
+<% if current_page?(articles_path) %>
+    <%= form_tag( articles_path , method: :get) do %>
+        <div class="form-inline mt-1 ">
+            <%= text_field_tag :search, params[:search], placeholder: " Search Articles", class:"form-comtrol shadow rounded col-4" %>
+            <%= collection_select(:category, :name, Category.all,:name,:name,{:prompt => 'Categories'},{class:"form-comtrol shadow rounded col-1 "}) %>
+            &nbsp;<%= submit_tag "Search", class:"btn btn-info btn-sm shadow rounded", :name => nil %>
+        </div>
+    <% end %>
+<%end%>
+</center>
+<%if @articles.any?%>
 <% @articles.each do |cur_article| %>
             <br><br>
-            <div class="row justify-content-md-center">
             <div class="col-6">
         <div class="card text-center shadow-lg p-3 mb-5 rounded text-muted bg-dark">
             <div class="card-header text-white">
@@ -31,3 +42,7 @@
             </div>
             </div></div></div>
         <% end %>
+<%else%>
+    <br><br><br><br><br><br><br><br> <center>
+    <h1 class="text-muted"> No articles available</h1> </center>
+<%end%>

@@ -11,6 +11,15 @@ class Article < ApplicationRecord
     validates :description, presence: true, length: {minimum: 15, maximum: 600}
     validates :content, presence: true, length: {minimum: 400}
 
+    scope :filter_by_title, -> (title) {where("lower(title) LIKE :search", search: "%#{title.downcase}%")}
+
+    def self.filter_by_category(category)
+        cg = Category.where(name: category)
+        articles = cg.map{ |cat| cat.articles}
+        articles = articles.flatten
+        return articles
+    end
+
     def self.to_csv
         attributes = %w{id title description}
 

@@ -21,19 +21,13 @@ class ArticlesController < ApplicationController
         end
     end
     def index
-        @articles = Article.where("author_id != :cur_author", cur_author: "#{current_author.id}").order(updated_at: :desc).includes(:author,:article_categories)
+        @articles = Article.all.order(updated_at: :desc).includes(:author,:categories)
+        @articles = @articles.filter_by_title(params[:search]) if params[:search].present?
+        @articles = @articles.filter_by_category(params[:category][:name]) if params[:category].present? and params[:category][:name].present?
         #@all_articles = Article.all
         respond_to do |format|
             format.html
             format.csv { send_data Article.all.to_csv, filename: "articles-#{Date.today}.csv" }
-        end
-    end
-    def search
-        if params[:search].blank? 
-            redirect_to articles_path
-        else
-            @key = params[:search][0].downcase
-            @articles = Article.all.where("lower(title) LIKE :search", search: "%#{@key}%").includes(:author)
         end
     end
     def new
