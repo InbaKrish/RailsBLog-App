@@ -56,7 +56,6 @@ module Content
             http.use_ssl = true
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             request = Net::HTTP::Post.new(url)
-            puts request
             response = http.request(request)
             response = JSON.parse response.body
             return response["is-bad"]
