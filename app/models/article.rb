@@ -5,8 +5,9 @@ class Article < ApplicationRecord
     has_many :views, dependent: :delete_all
 
     has_rich_text :body
+    validates :body , presence: true, length: {minimum: 400}
 
-    has_many :article_categories
+    has_many :article_categories,dependent: :delete_all
     has_many :categories, through: :article_categories
 
     validates :title , presence: true,uniqueness: true, length: {minimum: 6, maximum: 80}
@@ -21,17 +22,6 @@ class Article < ApplicationRecord
         return articles
     end
 
-    def self.to_csv
-        attributes = %w{id title description}
-
-        CSV.generate(headers: true) do |csv|
-            csv << attributes
-            all.each do |article|
-                csv << article.attributes.values_at(*attributes)
-            end
-        end
-    end
-
     def already_saved(current_author)
         articles = current_author.savedarticles
         #articles = articles.map{ |obj| obj.article_id }
@@ -43,5 +33,33 @@ class Article < ApplicationRecord
         views = self.views
         views = views.pluck(:author_id)
         return views.include?(current_author.id)
+    end
+end
+
+require 'uri'
+require 'net/http'
+require "net/https"
+require 'openssl'
+require "json"
+module Content
+    class CheckContent
+        def initialize
+            @content = ""
+        end
+        def is_abusive(content)
+            @content = content.to_plain_text.to_s
+            @content = @content.gsub(/[[:^ascii:]]/, "")
+            api = "https://neutrinoapi.net/bad-word-filter?user-id=InbaKrish&api-key=JWwEyBi3ht8YGNDM6HMDvV06BEvEcsZlkQKBwyswN6k3rK6S&content="+@content
+            url = URI(api)
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            request = Net::HTTP::Post.new(url)
+            puts request
+            response = http.request(request)
+            response = JSON.parse response.body
+            return response["is-bad"]
+        end
     end
 end

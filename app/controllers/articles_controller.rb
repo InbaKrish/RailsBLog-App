@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 
     def show
         if current_author
-           if !@article.already_viewed(current_author)
+           if not @article.already_viewed(current_author)
             @view = @article.views.new(author_id:current_author.id)
             @view.save
            end
@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
         #@all_articles = Article.all
         respond_to do |format|
             format.html
-            format.csv { send_data Article.all.to_csv, filename: "articles-#{Date.today}.csv" }
+            format.csv { send_data Services::Conversion.new.to_csv, filename: "articles-#{Date.today}.csv" }
         end
     end
     def new
@@ -40,15 +40,26 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
         @article.author_id = current_author.id
-        if @article.save
-            flash[:notice] = "Article created successfully"
-            redirect_to @article
+        if Content::CheckContent.new.is_abusive(@article.body)
+            current_author.lock_access!
+            flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
+            redirect_to new_author_session_path
         else
-            render :new
+            if @article.save
+                flash[:notice] = "Article created successfully"
+                redirect_to @article
+            else
+                render :new
+            end
         end
     end
 
     def update
+        if Content::CheckContent.new.is_abusive(@article.body)
+            current_author.lock_access!
+            flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
+            redirect_to new_author_session_path
+        end
         if @article.update(article_params)
             flash[:notice] = "Article updated successfully"
             redirect_to @article
