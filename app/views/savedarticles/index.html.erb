@@ -1,7 +1,8 @@
-<center><h2> <%= current_author.username %>'s - Saved Articles </h2></center>
+<center><h2> <%= current_author.username %>'s - Saved Articles </h2>
 <% if @articles and @articles.length >0 %>
     <%= render 'articles/showarticles' %>
 <%else%>
     <br><br><br><br><br><br><br><br> <center>
     <h1 class="text-muted"> No articles available</h1> </center>
 <%end%>
+</center>

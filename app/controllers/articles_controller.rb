@@ -6,10 +6,10 @@ class ArticlesController < ApplicationController
 
     def show
         if current_author
-            @view = @article.views.new(author_id: current_author.id)
-            if @view.valid?
-                @view.save 
-            end
+           if !@article.already_viewed(current_author)
+            @view = @article.views.new(author_id:current_author.id)
+            @view.save
+           end
         end
 
         respond_to do |format|
@@ -68,7 +68,7 @@ class ArticlesController < ApplicationController
     private
 
     def article_params
-        params.require(:article).permit(:title,:description,:content,category_ids: [] )
+        params.require(:article).permit(:title,:description,:body,category_ids: [] )
     end
 
     def set_article

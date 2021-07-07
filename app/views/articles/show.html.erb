@@ -13,7 +13,7 @@
     <div class="text-white">
         <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.author.username, user_path(@article.author.id), class:"text-secondary" %></i></small></p>
         <pre class="text-white">
-            <%= @article.content %>
+            <%= @article.body %>
         <pre>
     </div>
     <h2> <%= @article.comments.count %> Comments</h2>

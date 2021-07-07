@@ -4,12 +4,13 @@ class Article < ApplicationRecord
     has_many :likes, dependent: :delete_all
     has_many :views, dependent: :delete_all
 
+    has_rich_text :body
+
     has_many :article_categories
     has_many :categories, through: :article_categories
 
     validates :title , presence: true,uniqueness: true, length: {minimum: 6, maximum: 80}
     validates :description, presence: true, length: {minimum: 15, maximum: 600}
-    validates :content, presence: true, length: {minimum: 400}
 
     scope :filter_by_title, -> (title) {where("lower(title) LIKE :search", search: "%#{title.downcase}%")}
 
@@ -35,6 +36,12 @@ class Article < ApplicationRecord
         articles = current_author.savedarticles
         #articles = articles.map{ |obj| obj.article_id }
         articles = articles.pluck(:article_id)
-        return articles.include?(self)
+        return articles.include?(self.id)
+    end
+
+    def already_viewed(current_author)
+        views = self.views
+        views = views.pluck(:author_id)
+        return views.include?(current_author.id)
     end
 end

@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   end
   delete 'articles/:id/delete' => 'articles#destroy', as: 'articles_delete'
   get '/articles/:id/delete' => 'articles#destroy'
-  #delete '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
-  get '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
-  get '/articles/:article_id/like' => 'likes#create', as: 'like'
+  delete '/articles/:article_id/comment/delete' => 'comments#destroy', as: 'delete_comment'
+  post '/articles/:article_id/like' => 'likes#create', as: 'like'
   get '/search' => 'articles#search', as: 'search'
 
   # user routes

@@ -15,14 +15,14 @@
     <div class="form-group row mt-4">
         <%= new.label :description, class:"col-2 col-form-table" %>
         <div class="col-10">
-        <%= new.text_area :description, class:"form-control shadow rounded", placeholder:"Description of the article", rows:5 %></div>
+        <%= new.text_area :description, class:"form-control shadow rounded", placeholder:"Description of the article", rows:3 %></div>
     </div></span>
 
     <span style="color:rgb(179, 179, 179)">
     <div class="form-group row mt-4">
-        <%= new.label :content, class:"col-2 col-form-table" %>
+        <%= new.label :body, class:"col-2 col-form-table" %>
         <div class="col-10">
-        <%= new.text_area :content, class:"form-control shadow rounded", placeholder:"Add your article content", rows:10 %></div>
+        <%= new.rich_text_area :body,class:"form-control shadow rounded",rows:12 %></div>
     </div></span><hr>
     <span style="color:rgb(179, 179, 179)">
     &nbsp;&nbsp;&nbsp;&nbsp;

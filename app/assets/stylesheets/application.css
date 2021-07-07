@@ -14,3 +14,5 @@
  *= require_tree .
  *= require_self
  */
+@import "trix/dist/trix";
+@import "./actiontext.scss";
