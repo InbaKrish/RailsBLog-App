@@ -21,6 +21,20 @@ ActiveAdmin.register Author do
   action_item :lock,only: :edit do
     link_to 'Lock User', lock_admin_author_path(author),method: :put if not author.access_locked?
   end
+  action_item :only => :index do
+    link_to 'Upload CSV', :action => 'upload_csv'
+  end
+
+  collection_action :upload_csv do
+    # Services::Conversion.new.from_csv(params[:file])
+    # redirect_to admin_author_path(author)
+  end
+  collection_action :import,method: :post do
+    Services::Conversion.new.from_csv(params[:file])
+    flash[:notice] = "CSV imported successfully!"
+    redirect_to :action => :index
+  end
+
 
   member_action :lock,method: :put do
     author = Author.find(params[:id])
