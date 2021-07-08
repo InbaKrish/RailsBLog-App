@@ -40,7 +40,8 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
         @article.author_id = current_author.id
-        if Content::CheckContent.new.is_abusive(@article.body)
+        # if Content::CheckContent.new.is_abusive(@article.body)
+        if false
             current_author.lock_access!
             flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
             redirect_to new_author_session_path
@@ -55,7 +56,8 @@ class ArticlesController < ApplicationController
     end
 
     def update
-        if Content::CheckContent.new.is_abusive(@article.body)
+        # if Content::CheckContent.new.is_abusive(@article.body)
+        if false
             current_author.lock_access!
             flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
             redirect_to new_author_session_path
