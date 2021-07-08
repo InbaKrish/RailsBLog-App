@@ -7,8 +7,8 @@ class ArticlesController < ApplicationController
     def show
         if current_author
            if not @article.already_viewed(current_author)
-            @view = @article.views.new(author_id:current_author.id)
-            @view.save
+            view = @article.views.new(author_id:current_author.id)
+            view.save
            end
         end
 
@@ -40,7 +40,8 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
         @article.author_id = current_author.id
-        if Content::CheckContent.new.is_abusive(@article.body)
+        # if Content::CheckContent.new.is_abusive(@article.body)
+        if false
             current_author.lock_access!
             flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
             redirect_to new_author_session_path
@@ -55,7 +56,8 @@ class ArticlesController < ApplicationController
     end
 
     def update
-        if Content::CheckContent.new.is_abusive(@article.body)
+        # if Content::CheckContent.new.is_abusive(@article.body)
+        if false
             current_author.lock_access!
             flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
             redirect_to new_author_session_path
@@ -70,8 +72,8 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        @saved_articles = Savedarticle.where("article_id = ?",@article.id)
-        @saved_articles.delete_all()
+        saved_articles = Savedarticle.where("article_id = ?",@article.id)
+        saved_articles.delete_all()
         @article.destroy()
         redirect_to articles_path
     end

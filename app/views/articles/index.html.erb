@@ -1,4 +1,5 @@
 <center>
-        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1><br>
+        <h1 class="mt-4 "> <span style="color:rgb(179, 179, 179)"> All Articles</span></h1>
+        <%= link_to('Export articles - CSV', articles_path(@article, format: :csv), class:"btn btn-success btn-sm shadow rounded mb-3",target: :_blank) %>
         <%= render 'showarticles' %>
 </center>

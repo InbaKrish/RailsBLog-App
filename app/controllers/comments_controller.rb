@@ -6,9 +6,9 @@ class CommentsController < ApplicationController
     def new
     end
     def create
-        @comment = @article.comments.create(params.require(:comment).permit(:content))
-        @comment.user_id = current_author.id
-        if @comment.save
+        comment = @article.comments.create(params.require(:comment).permit(:content))
+        comment.user_id = current_author.id
+        if comment.save
             flash[:notice] = "Comment Posted successfully !!!"
             redirect_to article_path(@article)
         else
@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
         end
     end
     def destroy 
-        @comment = Comment.find_by(user_id:current_author.id,article_id:params[:article_id])
-        if @comment
-            @comment.destroy
+        comment = Comment.find_by(user_id:current_author.id,article_id:params[:article_id])
+        if comment
+            comment.destroy
             flash[:notice] = "Comment deleted , Successfully !"
             redirect_to article_path(@article)
         else
