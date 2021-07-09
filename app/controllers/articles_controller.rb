@@ -43,7 +43,6 @@ class ArticlesController < ApplicationController
         @article.author_id = current_author.id
         bad_words = Content::CheckContent.new.is_abusive(@article.body)
         if bad_words.length > 0 
-            byebug
             flash[:notice] = "Your content is abusive , try to remove - #{bad_words} words"
             @@abuse_limit = @@abuse_limit + 1
             if @@abuse_limit > 3

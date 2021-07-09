@@ -61,21 +61,23 @@ RSpec.describe "Articles", type: :request do
   describe "POST /create" do
     context "create with valid params" do
       it "creates new article" do
-        expect {
-          sign_in @test_user
-          article = Article.new(valid_attributes)
-          article.author = @test_user
-          article.save
-          post articles_path, params: { article: valid_attributes}
-        }.to change(Article, :count).by(1)
-      end
-      it "redirects to articles path after destroy" do
         sign_in @test_user
-        article = Article.new(valid_attributes)
-        article.author = @test_user
-        article.save
-        delete articles_delete_path(article)
-        expect(response).to redirect_to(articles_url)
+        post articles_path, params: {article: valid_attributes}
+        response.should redirect_to(article_path(Article.last))
+        Article.last.description.should == 'Test description '
+      end
+      it "not creates body with bad words" do
+        expect{
+          bad_content = {
+            id: '1',
+            title: 'Test request',
+            description: 'Test description ',
+            body: dummy_body+"ass",
+            author: @test_user
+          }
+          sign_in @test_user
+          post articles_path,params: { article: bad_content}
+        }.to change(Article, :count).by(0)
       end
     end
     context "create with invalid params" do

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
   get '/api/v1/articles' => 'api/v1/articles#all_articles'
   get '/api/v1/articles/:id' => 'api/v1/articles#show',as: "api_v1_article"
-  post '/api/v1/articles/new' => 'api/v1/articles#create'
+  post '/api/v1/articles/new' => 'api/v1/articles#create',as: "api_create_article"
   get '/api/v1/authors/:id/articles' => 'api/v1/articles#index',as: "user_articles"
 
   #doorkeeper routes
