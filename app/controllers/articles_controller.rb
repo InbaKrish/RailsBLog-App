@@ -3,12 +3,13 @@ class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_author! , except: [:show, :index]
     before_action :check_user , only: [:edit, :update, :destroy]
-
+    @@abuse_limit = 0
     def show
         if current_author
            if not @article.already_viewed(current_author)
             view = @article.views.new(author_id:current_author.id)
             view.save
+            redirect_to article_path(@article)
            end
         end
 
@@ -40,11 +41,19 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
         @article.author_id = current_author.id
-        # if Content::CheckContent.new.is_abusive(@article.body)
-        if false
-            current_author.lock_access!
-            flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
-            redirect_to new_author_session_path
+        bad_words = Content::CheckContent.new.is_abusive(@article.body)
+        if bad_words.length > 0 
+            byebug
+            flash[:notice] = "Your content is abusive , try to remove - #{bad_words} words"
+            @@abuse_limit = @@abuse_limit + 1
+            if @@abuse_limit > 3
+                flash[:notice] = "Your account is banned due to abusive content , contact admin !!!"
+                current_author.lock_access!
+                @@abuse_limit = 0
+                redirect_to new_author_session_path
+                return
+            end
+            render :edit
         else
             if @article.save
                 flash[:notice] = "Article created successfully"
@@ -56,19 +65,26 @@ class ArticlesController < ApplicationController
     end
 
     def update
-        # if Content::CheckContent.new.is_abusive(@article.body)
-        if false
-            current_author.lock_access!
-            flash[:notice] = "Your article contains abusive content , Your account is banned !!!"
-            redirect_to new_author_session_path
-        end
-        if @article.update(article_params)
-            flash[:notice] = "Article updated successfully"
-            redirect_to @article
-        else
+        bad_words = Content::CheckContent.new.is_abusive(@article.body)
+        if bad_words.length > 0 
+            flash[:notice] = "Your content is abusive , try to remove - #{bad_words} words"
+            @@abuse_limit = @@abuse_limit + 1
+            if @@abuse_limit > 3
+                flash[:notice] = "Your account is banned due to abusive content , contact admin !!!"
+                current_author.lock_access!
+                @@abuse_limit = 0
+                redirect_to new_author_session_path
+                return
+            end
             render :edit
+        else
+            if @article.update(article_params)
+                flash[:notice] = "Article updated successfully"
+                redirect_to @article
+            else
+                render :edit
+            end
         end
-
     end
 
     def destroy

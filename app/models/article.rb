@@ -57,8 +57,12 @@ module Content
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             request = Net::HTTP::Post.new(url)
             response = http.request(request)
-            response = JSON.parse response.body
-            return response["is-bad"]
+            if response.kind_of? Net::HTTPSuccess
+                response = JSON.parse response.body
+                puts response
+                return response["bad-words-list"].join(',')
+            end
+            return false
         end
     end
 end
