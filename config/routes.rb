@@ -31,23 +31,19 @@ Rails.application.routes.draw do
   get '/articles/:article_id/removesaved' => 'savedarticles#destroy'
 
   #api routes
-  Rails.application.routes.draw do 
   use_doorkeeper
     namespace :api do
       namespace :v1 do
         resources :authors 
       end
     end
-  end
   get '/api/v1/articles' => 'api/v1/articles#all_articles'
   get '/api/v1/articles/:id' => 'api/v1/articles#show',as: "api_v1_article"
   post '/api/v1/articles/new' => 'api/v1/articles#create',as: "api_create_article"
   get '/api/v1/authors/:id/articles' => 'api/v1/articles#index',as: "user_articles"
 
   #doorkeeper routes
-  Rails.application.routes.draw do
-    use_doorkeeper do
-      skip_controllers :authorizations, :applications, :authorized_applications
-    end
+  use_doorkeeper do
+    skip_controllers :authorizations, :applications, :authorized_applications
   end
 end

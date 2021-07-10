@@ -7,8 +7,8 @@
             <% else %>
                 <%= link_to 'Save_article', savearticle_path(:article_id => @article.id), class:"btn btn-outline-muted btn-sm shadow rounded text-muted" %>
             <% end %>
+            <%= link_to('PDF', article_path(@article, format: :pdf), class:"btn btn-danger btn-sm shadow rounded text-white",target: :_blank) %> 
         <%end%>&nbsp;
-        <%= link_to('PDF', article_path(@article, format: :pdf), class:"btn btn-danger btn-sm shadow rounded text-white",target: :_blank) %> 
     </p>
     <div class="text-white">
         <p><h2><%= @article.title %></h2><small><i>by @<%= link_to @article.author.username, user_path(@article.author.id), class:"text-secondary" %></i></small></p>

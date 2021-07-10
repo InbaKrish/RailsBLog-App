@@ -9,3 +9,4 @@ categories = %w{food fashion health fitness technology business DIY sports finan
 categories.each do |category|
     Category.create(name: category.capitalize)
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
