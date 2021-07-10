@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   use_doorkeeper
   devise_for :authors, except: [:destroy]
   root "pages#home"
@@ -43,7 +45,9 @@ Rails.application.routes.draw do
   get '/api/v1/authors/:id/articles' => 'api/v1/articles#index',as: "user_articles"
 
   #doorkeeper routes
-  use_doorkeeper do
-    skip_controllers :authorizations, :applications, :authorized_applications
-  end
+
+    use_doorkeeper do
+      skip_controllers :authorizations, :applications, :authorized_applications
+    end
+
 end
