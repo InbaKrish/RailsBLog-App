@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, :role
 
   index do
     selectable_column
@@ -16,11 +16,13 @@ ActiveAdmin.register AdminUser do
   filter :sign_in_count
   filter :created_at
 
+  ROLES = ["admin","manager","user"]
   form do |f|
     f.inputs do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :role, :as => :select, :collection => ROLES, :include_blank => false
     end
     f.actions
   end

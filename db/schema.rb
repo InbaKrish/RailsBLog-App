@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_030101) do
+ActiveRecord::Schema.define(version: 2021_07_30_093641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_030101) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "role", default: "admin", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -166,7 +167,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_030101) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "author_id"
-    t.index ["author_id"], name: "index_savedarticles_on_author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -197,7 +197,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_030101) do
   add_foreign_key "likes", "articles"
   add_foreign_key "likes", "authors"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
-  add_foreign_key "savedarticles", "authors"
   add_foreign_key "views", "articles"
   add_foreign_key "views", "authors"
 end
